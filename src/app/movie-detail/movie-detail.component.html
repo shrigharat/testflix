@@ -1,0 +1,37 @@
+<div class="search-section">
+  <div class="img-container">
+    <img src="assets/img/bg.jpg" alt="" />
+  </div>
+  <div class="overlay"></div>
+  <div class="content">
+    <h1>Search Movies</h1>
+    <app-search-input
+      (emitter)="searchFunction($event)"
+      [query]="searchQuery"
+    ></app-search-input>
+  </div>
+</div>
+<div class="loading" *ngIf="loading">
+  <div class="lds-facebook">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+<div class="movie-details">
+  <div class="img-container">
+    <img [src]="movie.Poster" alt="" />
+  </div>
+  <div class="details-content">
+    <p class="movie-title">{{ movie.Title }}</p>
+    <p class="detail-line"><strong>Year</strong> - {{ movie.Year }}</p>
+    <p class="detail-line"><strong>Rated</strong> - {{ movie.Rated }}</p>
+    <p class="detail-line"><strong>Released</strong> - {{ movie.Released }}</p>
+    <p class="detail-line"><strong>Director</strong> - {{ movie.Director }}</p>
+    <p class="detail-line"><strong>Actors</strong> - {{ movie.Actors }}</p>
+    <p class="detail-line">
+      <strong>Genre</strong> -
+      <app-chip style="margin-right:.4rem;" *ngFor="let genre of movie.Genre" text="{{ genre }}"></app-chip>
+    </p>
+  </div>
+</div>

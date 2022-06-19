@@ -1,0 +1,15 @@
+<form class="search-container" name="searchForm" (ngSubmit)="searchFunction($event)">
+  <input
+    type="text"
+    [value]="query"
+    placeholder="Enter movie name"
+    (keyup)="updateQuery($event)"
+  />
+  <img
+    class="search-icon"
+    src="assets/img/search-icon.png"
+    width="24"
+    height="24"
+    (click)="searchFunction($event)"
+  />
+</form>

@@ -1,0 +1,8 @@
+.chip{
+    padding: .2rem .5rem;
+    border-radius: 1rem;
+    width: max-content;
+    height: auto;
+    font-size: .7rem;
+    display: inline;
+}

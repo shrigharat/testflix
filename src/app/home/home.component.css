@@ -1,0 +1,49 @@
+#home-section {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.bg {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+#home-section .bg img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* z-index: ;s */
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  /* background-color: red; */
+}
+
+.content h1{
+  color: white;
+  font-weight: 600;
+  font-size: 3.5rem;
+  margin: 0;
+}

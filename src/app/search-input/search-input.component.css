@@ -1,0 +1,25 @@
+.search-container {
+  background-color: white;
+  padding: 0.9rem 1.2rem;
+  border-radius: 2rem;
+  width: 500px;
+  height: 3.3rem;
+  outline: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-container input {
+  outline: none;
+  border: none;
+  width: 95%;
+  height: 30px;
+  font-size: 1.3rem;
+}
+
+.search-container img {
+  cursor: pointer;
+}

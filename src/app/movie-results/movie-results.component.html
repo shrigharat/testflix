@@ -1,0 +1,26 @@
+<div class="search-section">
+  <div class="img-container">
+    <img src="assets/img/bg.jpg" alt="" />
+  </div>
+  <div class="overlay"></div>
+  <div class="content">
+    <h1>Search Movies</h1>
+    <app-search-input
+      (emitter)="searchFunction($event)"
+      [query]="searchQuery"
+    ></app-search-input>
+  </div>
+</div>
+<div class="loading" *ngIf="loading">
+  <div class="lds-facebook">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+<div class="movies-grid" *ngIf="loading === false">
+  <app-movie-card
+    [movie]="movie"
+    *ngFor="let movie of movieResults"
+  ></app-movie-card>
+</div>
