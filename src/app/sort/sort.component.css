@@ -1,0 +1,22 @@
+form {
+  width: 100%;
+  color: var(--text-color);
+}
+
+.sortby-year-radio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.apply-filter-btn {
+  padding: 0.4rem 0.8rem;
+  border-radius: 1rem;
+  border: 1px solid gray;
+  margin-top: 0.5rem;
+}
+
+.filter-name {
+  font-weight: 500;
+  margin-bottom: 0.7rem;
+}

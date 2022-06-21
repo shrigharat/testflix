@@ -1,0 +1,40 @@
+<form
+  [formGroup]="sortingForm"
+  name="movie"
+  class="filter-container"
+  (ngSubmit)="sortSubmit()"
+>
+  <p class="filter-name">Type</p>
+  <div class="sortby-year-radio">
+    <div class="rad-btn">
+      <input
+        formControlName="sortByYearType"
+        type="radio"
+        id="sortByYear"
+        value="none"
+      />
+      <label for="javascript">None</label>
+    </div>
+
+    <div class="rad-btn">
+      <input
+        formControlName="sortByYearType"
+        type="radio"
+        id="sortByYear"
+        value="asc"
+      />
+      <label for="html">Latest release</label><br />
+    </div>
+
+    <div class="rad-btn">
+      <input
+        formControlName="sortByYearType"
+        type="radio"
+        id="sortByYear"
+        value="desc"
+      />
+      <label for="css">Old release</label><br />
+    </div>
+  </div>
+  <button type="submit" class="apply-filter-btn">Apply Sort</button>
+</form>

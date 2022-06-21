@@ -31,7 +31,24 @@
     <p class="detail-line"><strong>Actors</strong> - {{ movie.Actors }}</p>
     <p class="detail-line">
       <strong>Genre</strong> -
-      <app-chip style="margin-right:.4rem;" *ngFor="let genre of movie.Genre" text="{{ genre }}"></app-chip>
+      <app-chip
+        style="margin-right: 0.4rem"
+        *ngFor="let genre of movie.Genre"
+        text="{{ genre }}"
+      ></app-chip>
+    </p>
+    <p class="detail-line">
+      <strong>Language</strong> -
+      <app-chip
+        style="margin-right: 0.4rem"
+        *ngFor="let lang of movie.Language"
+        text="{{ lang }}"
+      ></app-chip>
+    </p>
+    <p class="detail-line"><strong>Plot</strong> - {{ movie.Plot }}</p>
+    <p class="detail-line">
+      <strong>IMDB Rating</strong> - {{ movie.imdbRating }}
+      <progress id="rating" value="{{movie.imdbRating}}" max="10.0">32%</progress>
     </p>
   </div>
 </div>

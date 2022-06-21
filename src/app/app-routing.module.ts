@@ -5,12 +5,13 @@ import { HomeComponent } from './home/home.component';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { MovieResultsComponent } from './movie-results/movie-results.component';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: ':query', component: MovieResultsComponent },
+  { path: 'search/:query', component: MovieResultsComponent },
   { path: 'movie/:movieId', component: MovieDetailComponent },
-  // { path: ':search', redirectTo: '' },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

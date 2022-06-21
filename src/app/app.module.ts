@@ -10,13 +10,25 @@ import { SearchInputComponent } from './search-input/search-input.component';
 import { MovieResultsComponent } from './movie-results/movie-results.component';
 import { ChipComponent } from './chip/chip.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
-
-const CUSTOM_ELEMENTS_SCHEMA: SchemaMetadata = {
-  name: 'box-icon',
-};
+import { PaginationComponent } from './pagination/pagination.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { MovieFilterComponent } from './movie-filter/movie-filter.component';
+import { SortComponent } from './sort/sort.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, MovieDetailComponent, SearchInputComponent, MovieResultsComponent, ChipComponent, MovieCardComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    MovieDetailComponent,
+    SearchInputComponent,
+    MovieResultsComponent,
+    ChipComponent,
+    MovieCardComponent,
+    PaginationComponent,
+    NotFoundComponent,
+    MovieFilterComponent,
+    SortComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],

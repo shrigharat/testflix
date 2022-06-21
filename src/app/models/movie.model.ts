@@ -4,12 +4,12 @@ export default interface IMovie {
   Rated: string;
   Released: string;
   Runtime: string;
-  Genre: string;
+  Genre: string[];
   Director: string;
   Writer: string;
   Actors: string;
   Plot: string;
-  Language: string;
+  Language: string[];
   Country: string;
   Poster: string;
   imdbRating: string;
@@ -24,12 +24,12 @@ export const defaultMovie: IMovie = {
   Rated: '',
   Released: '',
   Runtime: '',
-  Genre: '',
+  Genre: [],
   Director: '',
   Writer: '',
   Actors: '',
   Plot: '',
-  Language: '',
+  Language: [],
   Country: '',
   Poster: '',
   imdbRating: '',

@@ -1,63 +1,160 @@
-.search-section{
-    width: 100%;
-    height: 30vh;
-    position: relative;
+.results-page{
+  height: 100%;
 }
 
-.search-section .img-container{
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
+.search-section {
+  width: 100%;
+  height: 30vh;
+  position: relative;
 }
 
-.search-section .img-container img{
-    object-position: center center;
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
+.search-section .img-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 
-.search-section .overlay{
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0,0,0,.7);
-    z-index: 0;
-    width: 100%;
-    height: 100%;
+.search-section .img-container img {
+  object-position: center center;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }
 
-.search-section .content{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.search-section .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.search-section .content h1{
-    color: white;
-    font-size: 2.3rem;
+.search-section .content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.loading{
-    width: 100%;
-    height: 40vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.theme-switch{
+  margin-left: auto;
+  margin-bottom: auto;
+  position: absolute;
+  color: var(--text-color);
+  z-index: 3;
+  top: .5rem;
+  right: 1rem;
+  width: 44px;
+  background-color: var(--foreground-color);
+  border-radius: 2rem;
+  padding: .2rem .1rem;
+  cursor: pointer;
 }
 
-.movies-grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.2rem;
-    padding: 2rem;
+.theme-switch .circle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transform: translateX(0);
+  transition: all .4s ease;
+  position: relative;
+  left: 0;
+}
+
+.theme-switch .circle.dark {
+  right: 0 !important;
+  left: none;
+  transform: translateX(18px);
+}
+
+.theme-switch .circle img{
+  height: 20px;
+  width: 20px;
+}
+
+.search-section .content h1 {
+  color: white;
+  font-size: 2.3rem;
+}
+
+.loading {
+  background-color: var(--background-color);
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.2rem;
+  padding: 1rem 2rem;
+  background-color: var(--background-color);
+}
+
+.no-results-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height:60vh;
+  font-size: 1.8rem;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.toggle-btns{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: .5rem;
+}
+
+.filters-section {
+  display: flex;
+  flex-direction: column;
+  padding: .5rem 2rem;
+  background-color: var(--background-color);
+}
+
+.open-filter {
+  width: max-content;
+  padding: 0.6rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid gray;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  background-color: var(--foreground-color);
+}
+
+.open-filter.open {
+  background-color: gray;
+  color: white;
+}
+
+@media screen and (max-width: 450px) {
+  .filters-section{
+    padding: 1rem;
+  }
+  .movies-grid{
+    padding: 1rem;
+  }
 }

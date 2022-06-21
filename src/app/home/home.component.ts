@@ -17,7 +17,9 @@ export class HomeComponent implements OnInit {
     // let movies = await this.movie.fetchMovies(this.query);
     // return false;
     console.log(searchQuery);
-    await this.router.navigateByUrl('/' + searchQuery);
+    await this.router.navigateByUrl(
+      'search/' + searchQuery + '?page=1&type=all'
+    );
     return false;
   }
 }

@@ -1,15 +1,38 @@
-<form class="search-container" name="searchForm" (ngSubmit)="searchFunction($event)">
+<form
+  class="search-container"
+  name="searchForm"
+  (ngSubmit)="searchFunction($event)"
+  (focus)="showSearchHistory = true"
+  tabindex="1"
+  #focusContainer
+>
   <input
     type="text"
     [value]="query"
     placeholder="Enter movie name"
     (keyup)="updateQuery($event)"
+    (focus)="showSearchHistory = true"
   />
-  <img
-    class="search-icon"
-    src="assets/img/search-icon.png"
-    width="24"
-    height="24"
+  <button
+    class="search-submit-btn"
+    type="submit"
     (click)="searchFunction($event)"
-  />
+  >
+    <img
+      class="search-icon"
+      src="assets/img/search-icon.png"
+      width="24"
+      height="24"
+    />
+  </button>
+  <div class="search-history" *ngIf="showSearchHistory">
+    <div
+      class="search-item"
+      *ngFor="let search of movieService.searchHistory"
+      (click)="searchItemClick(search)"
+    >
+      <img src="assets/img/clock.png" alt="" /><span>{{ search }}</span
+      ><img class="remove-btn" src="assets/img/close.png" alt="" />
+    </div>
+  </div>
 </form>

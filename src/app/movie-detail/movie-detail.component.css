@@ -40,61 +40,114 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: var(--text-color);
 }
 
 .search-section .content h1 {
-  color: white;
   font-size: 2.3rem;
 }
 
-.movie-details{
-    padding: 1.5rem;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 2rem;
-    /* background-color: red; */
+.movie-details {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+
+  background-color: var(--background-color);
+  /* background-color: red; */
 }
 
 .movie-details .img-container {
-    width: 40%;
-    min-height: 70vh;
-    height: 100%;
-    overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 40%;
+  min-height: 70vh;
+  height: 100%;
+  overflow: hidden;
 }
 
 .movie-details .img-container img {
-    width: auto;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .movie-details .details-content {
-    width: 60%;
-    height: 100%;
-    display: flex;
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-height: 70vh;
+  color: var(--text-color);
+}
+
+.movie-details p {
+  margin: 0;
+}
+
+.detail-line {
+  font-size: 1.2rem;
+}
+.movie-title {
+  font-size: 1.6rem;
+  margin: 0;
+  font-weight: 500;
+  margin-bottom: 1.5rem !important;
+}
+
+.property {
+  font-weight: 500;
+}
+
+@media screen and (max-width: 600px) {
+  /* .movie-details {
+    padding: 0.6rem;
     flex-direction: column;
-    gap: .6rem;
-    justify-content: flex-start;
-    align-items: flex-start;
-    min-height: 70vh;
+  } */
+
+  .movie-details .img-container{
+    width: 30%;
+    /* min-height: ; */
+  }
+
+  .movie-details .img-container img {
+    width: 100%;
+    height: auto;
+  }
+
+  .movie-details .details-content {
+    font-size: 0.8rem;
+  }
+
+  .detail-line{
+    font-size: 0.9rem !important;
+
+  }
 }
 
-.movie-details p{
-    margin: 0;
-}
 
-.detail-line{
-    font-size: 1.2rem;
-}
-.movie-title{
-    font-size: 1.6rem;
-    margin: 0;
-    font-weight: 500;
-    margin-bottom: 1.5rem !important;
-}
+@media screen and (max-width: 440px) {
+  .movie-details {
+    padding: 0.6rem;
+    flex-direction: column;
+  }
+  .movie-details .img-container{
+    width: 50%;
+    min-height: fit-content;
+  }
 
-.property{
-    font-weight: 500;
+  .movie-details .details-content{
+    width: 92%;
+  }
+
+  .movie-details .img-container img {
+    width: 100%;
+    height: auto;
+  }
 }

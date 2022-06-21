@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable, of, switchMap } from 'rxjs';
 import IMoviePreview from '../models/movie-preview.model';
 import { MovieService } from '../services/movie.service';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-movie-results',
@@ -10,212 +12,106 @@ import { MovieService } from '../services/movie.service';
 })
 export class MovieResultsComponent implements OnInit {
   searchQuery = '';
-  movieResults: IMoviePreview[] = [
-    {
-      Title: 'Italian Spiderman',
-      Year: '2007',
-      imdbID: 'tt2705436',
-      Type: 'movie',
-      Poster:
-        'https://m.media-amazon.com/images/M/MV5BYjFhN2RjZTctMzA2Ni00NzE2LWJmYjMtNDAyYTllOTkyMmY3XkEyXkFqcGdeQXVyNTA0OTU0OTQ@._V1_SX300.jpg',
-    },
-
-    {
-      Title: 'Superman, Spiderman or Batman',
-      Year: '2011',
-      imdbID: 'tt2084949',
-      Type: 'movie',
-      Poster:
-        'https://m.media-amazon.com/images/M/MV5BMjQ4MzcxNDU3N15BMl5BanBnXkFtZTgwOTE1MzMxNzE@._V1_SX300.jpg',
-    },
-
-    {
-      Title: 'Spiderman',
-      Year: '1990',
-      imdbID: 'tt0100669',
-      Type: 'movie',
-      Poster: 'N/A',
-    },
-
-    {
-      Title: 'Spiderman',
-      Year: '2010',
-      imdbID: 'tt1785572',
-      Type: 'movie',
-      Poster: 'N/A',
-    },
-
-    {
-      Title: 'Spiderman and Grandma',
-      Year: '2009',
-      imdbID: 'tt1433184',
-      Type: 'movie',
-      Poster:
-        'https://m.media-amazon.com/images/M/MV5BMjE3Mzg0MjAxMl5BMl5BanBnXkFtZTcwNjIyODg5Mg@@._V1_SX300.jpg',
-    },
-
-    {
-      Title: 'Fighting, Flying and Driving: The Stunts of Spiderman 3',
-      Year: '2007',
-      imdbID: 'tt1132238',
-      Type: 'movie',
-      Poster:
-        'https://m.media-amazon.com/images/M/MV5BNTI3NDE1ZmEtMTRiMS00YTY4LTk0OGItNjY4YmI0MDM4OGM4XkEyXkFqcGdeQXVyODE2NDgwMzM@._V1_SX300.jpg',
-    },
-
-    {
-      Title: 'The Amazing Spiderman T4 Premiere Special',
-      Year: '2012',
-      imdbID: 'tt2233044',
-      Type: 'movie',
-      Poster: 'N/A',
-    },
-
-    {
-      Title: 'Spiderman in Cannes',
-      Year: '2016',
-      imdbID: 'tt5978586',
-      Type: 'movie',
-      Poster:
-        'https://m.media-amazon.com/images/M/MV5BZDlmMGQwYmItNTNmOS00OTNkLTkxNTYtNDM3ZWVlMWUyZDIzXkEyXkFqcGdeQXVyMTA5Mzk5Mw@@._V1_SX300.jpg',
-    },
-
-    {
-      Title: 'Amazing Spiderman Syndrome',
-      Year: '2012',
-      imdbID: 'tt2586634',
-      Type: 'movie',
-      Poster: 'N/A',
-    },
-
-    {
-      Title: "Hollywood's Master Storytellers: Spiderman Live",
-      Year: '2006',
-      imdbID: 'tt2158533',
-      Type: 'movie',
-      Poster: 'N/A',
-    },
-  ];
+  totalResults: number = 1;
+  currentPage = 1;
+  movieResults: IMoviePreview[] = [];
   loading = true;
+  isFiltersOpen: boolean = false;
+  isSortingOpen: boolean = false;
+  resultType = 'all';
+  sortbyYear = 'none';
 
   constructor(
     public route: ActivatedRoute,
     public router: Router,
-    public movieService: MovieService
-  ) {
-    // console.log(
-    //   'Movie results page constructor : ',
-    //   route.snapshot.params['query']
-    // );
-    // this.searchQuery = route.snapshot.params['query'];
-  }
+    public movieService: MovieService,
+    public theme: ThemeService
+  ) {}
 
   ngOnInit(): void {
+    //subscribe to route param changes
     this.route.params.subscribe((params: Params) => {
+      //update the search query only when route param changes
       console.log(params);
       this.searchQuery = params['query'];
       this.searchFunction(this.searchQuery);
     });
+
+    this.route.queryParamMap
+      .pipe(
+        switchMap((queryParams: Params) => {
+          console.log('Through switch map');
+          console.log({ queryParams });
+          return of(queryParams);
+        })
+      )
+      .subscribe((queryParams: Params) => {
+        console.log('After switch map');
+        console.log({ queryParams });
+        console.log({ ...queryParams['params'] });
+        this.currentPage = parseInt(queryParams['params']['page']);
+        this.resultType = queryParams['params']['type'];
+        this.searchFunction(this.searchQuery);
+      });
   }
 
+  //navigate to new route parameter when search form is submitted
+  async changeParams(searchString: string) {
+    await this.router.navigateByUrl(
+      'search/' + searchString + '?page=1&type=' + this.resultType
+    );
+  }
+
+  //search movies
   async searchFunction(searchString: string) {
     this.loading = true;
-    if (searchString) {
-      // this.movieResults = await this.movieService.fetchMovies(searchString);
+    try {
+      if (searchString) {
+        let result = await this.movieService.fetchMovies(
+          searchString,
+          this.currentPage,
+          this.resultType
+        );
+        if (!result['Search']) {
+          this.movieResults = [];
+        } else {
+          this.movieResults = result['Search'];
+        }
+        this.totalResults = parseInt(result['totalResults']);
+      }
+      this.loading = false;
+    } catch (e) {
+      this.loading = false;
+      this.movieResults = [];
+      console.error(e);
     }
-    // this.route.snapshot.params['query'] = searchString;
-    console.log('Movie results : ', this.movieResults);
-    this.loading = false;
+    console.log(this.movieResults);
   }
 
-  movies = {
-    Search: [
-      {
-        Title: 'Italian Spiderman',
-        Year: '2007',
-        imdbID: 'tt2705436',
-        Type: 'movie',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BYjFhN2RjZTctMzA2Ni00NzE2LWJmYjMtNDAyYTllOTkyMmY3XkEyXkFqcGdeQXVyNTA0OTU0OTQ@._V1_SX300.jpg',
-      },
+  //update the query parameter in page when pagination button is clicked
+  async fetchNextPage(pageNo: number) {
+    if (pageNo === this.currentPage) return;
+    await this.router.navigateByUrl(
+      'search/' +
+        this.searchQuery +
+        '?page=' +
+        pageNo +
+        '&type=' +
+        this.resultType
+    );
+  }
 
-      {
-        Title: 'Superman, Spiderman or Batman',
-        Year: '2011',
-        imdbID: 'tt2084949',
-        Type: 'movie',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BMjQ4MzcxNDU3N15BMl5BanBnXkFtZTgwOTE1MzMxNzE@._V1_SX300.jpg',
-      },
+  async applyFilter(filters: any) {
+    console.log({ filters });
+    await this.router.navigateByUrl(
+      'search/' + this.searchQuery + '?page=1' + '&type=' + filters.movieType
+    );
+  }
 
-      {
-        Title: 'Spiderman',
-        Year: '1990',
-        imdbID: 'tt0100669',
-        Type: 'movie',
-        Poster: 'N/A',
-      },
-
-      {
-        Title: 'Spiderman',
-        Year: '2010',
-        imdbID: 'tt1785572',
-        Type: 'movie',
-        Poster: 'N/A',
-      },
-
-      {
-        Title: 'Spiderman and Grandma',
-        Year: '2009',
-        imdbID: 'tt1433184',
-        Type: 'movie',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BMjE3Mzg0MjAxMl5BMl5BanBnXkFtZTcwNjIyODg5Mg@@._V1_SX300.jpg',
-      },
-
-      {
-        Title: 'Fighting, Flying and Driving: The Stunts of Spiderman 3',
-        Year: '2007',
-        imdbID: 'tt1132238',
-        Type: 'movie',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BNTI3NDE1ZmEtMTRiMS00YTY4LTk0OGItNjY4YmI0MDM4OGM4XkEyXkFqcGdeQXVyODE2NDgwMzM@._V1_SX300.jpg',
-      },
-
-      {
-        Title: 'The Amazing Spiderman T4 Premiere Special',
-        Year: '2012',
-        imdbID: 'tt2233044',
-        Type: 'movie',
-        Poster: 'N/A',
-      },
-
-      {
-        Title: 'Spiderman in Cannes',
-        Year: '2016',
-        imdbID: 'tt5978586',
-        Type: 'movie',
-        Poster:
-          'https://m.media-amazon.com/images/M/MV5BZDlmMGQwYmItNTNmOS00OTNkLTkxNTYtNDM3ZWVlMWUyZDIzXkEyXkFqcGdeQXVyMTA5Mzk5Mw@@._V1_SX300.jpg',
-      },
-
-      {
-        Title: 'Amazing Spiderman Syndrome',
-        Year: '2012',
-        imdbID: 'tt2586634',
-        Type: 'movie',
-        Poster: 'N/A',
-      },
-
-      {
-        Title: "Hollywood's Master Storytellers: Spiderman Live",
-        Year: '2006',
-        imdbID: 'tt2158533',
-        Type: 'movie',
-        Poster: 'N/A',
-      },
-    ],
-    totalResults: '24',
-    Response: 'True',
-  };
+  handleSortEvent(sortByYearType: string) {
+    this.movieResults = this.movieService.sortMovies(
+      this.movieResults,
+      sortByYearType
+    );
+  }
 }

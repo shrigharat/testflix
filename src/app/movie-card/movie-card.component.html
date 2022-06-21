@@ -6,7 +6,7 @@
     <!-- <div class="movie-type"> -->
       <app-chip class="movie-type" bgColor="rgba(0,0,0,0.7)" text="{{ movie.Type }}"></app-chip>
     <!-- </div> -->
-    <a routerLink="/movie/{{ movie.imdbID }}">{{ movie.Title }}</a>
+    <a title="{{movie.Title}}" routerLink="/movie/{{ movie.imdbID }}">{{ movie.Title }}</a>
     <app-chip text="{{ movie.Year }}"></app-chip>
   </div>
 </article>

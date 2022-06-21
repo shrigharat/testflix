@@ -1,0 +1,50 @@
+<form
+  [formGroup]="filtersForm"
+  name="movie"
+  class="filter-container"
+  (ngSubmit)="filterSubmit()"
+>
+  <p class="filter-name">Type</p>
+  <div class="movie-type-radio">
+    <div class="rad-btn">
+      <input
+        formControlName="movieType"
+        type="radio"
+        id="episode"
+        value="all"
+      />
+      <label for="javascript">All</label>
+    </div>
+
+    <div class="rad-btn">
+      <input
+        formControlName="movieType"
+        type="radio"
+        id="movie"
+        value="movie"
+      />
+      <label for="html">Movie</label><br />
+    </div>
+
+    <div class="rad-btn">
+      <input
+        formControlName="movieType"
+        type="radio"
+        id="series"
+        value="series"
+      />
+      <label for="css">Series</label><br />
+    </div>
+
+    <div class="rad-btn">
+      <input
+        formControlName="movieType"
+        type="radio"
+        id="episode"
+        value="episode"
+      />
+      <label for="javascript">Episode</label>
+    </div>
+  </div>
+  <button type="submit" class="apply-filter-btn">Apply filter</button>
+</form>
