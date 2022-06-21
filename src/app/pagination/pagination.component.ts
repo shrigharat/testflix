@@ -57,7 +57,6 @@ export class PaginationComponent implements OnInit, OnChanges {
       });
     }
     this.displayPageNumbers = displayButtons;
-    console.log({ currentPage: this.currentPage, displayButtons });
   }
 
   pageButtonClick(pageNumber: number) {

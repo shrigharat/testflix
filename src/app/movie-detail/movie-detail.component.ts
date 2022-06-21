@@ -38,7 +38,6 @@ export class MovieDetailComponent implements OnInit {
     }
     movie.Genre = movie.Genre.split(', ');
     movie.Language = movie.Language.split(', ');
-    console.log(this.movie.Genre);
     this.movie = movie;
     this.loading = false;
   }

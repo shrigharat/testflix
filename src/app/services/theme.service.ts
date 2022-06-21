@@ -7,9 +7,9 @@ export class ThemeService {
 
   darkMode;
 
+  //fetch previously stored value for dark mode from local storage
   constructor() { 
     this.darkMode = Boolean(localStorage.getItem('darkMode'));
-    console.log('Theme service initialized : ', this.darkMode);
     document.body.setAttribute('data-theme', this.darkMode ? 'dark' : 'light');
   }
 

@@ -30,7 +30,7 @@ export class SearchInputComponent implements OnInit {
         !this.focusContainer.nativeElement.contains(e.target)
       ) {
         this.showSearchHistory = false;
-        console.log('Clicked outside focus container');
+        // console.log('Clicked outside focus container');
       }
     });
   }
@@ -42,7 +42,6 @@ export class SearchInputComponent implements OnInit {
   }
 
   searchItemClick(item: string) {
-    console.log('Search item clicked : ' + item);
     this.query = item;
   }
 

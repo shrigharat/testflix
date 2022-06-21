@@ -7,7 +7,7 @@ import IMoviePreview from '../models/movie-preview.model';
   providedIn: 'root',
 })
 export class MovieService {
-  baseUrl = 'http://www.omdbapi.com/?apikey=' + environment.omdbKey;
+  baseUrl = 'https://www.omdbapi.com/?apikey=' + environment.omdbKey;
   searchHistory: string[] = [];
 
   constructor() {
@@ -43,8 +43,6 @@ export class MovieService {
     this.searchHistory.unshift(newSearchString);
     this.searchHistory = [...new Set(this.searchHistory)];
     this.updateLSSearchHistory();
-    // console.log('Current search History');
-    // console.log(this.searchHistory);
   }
 
   removeSearchHistory(searchString: string) {

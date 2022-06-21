@@ -32,7 +32,6 @@ export class MovieResultsComponent implements OnInit {
     //subscribe to route param changes
     this.route.params.subscribe((params: Params) => {
       //update the search query only when route param changes
-      console.log(params);
       this.searchQuery = params['query'];
       this.searchFunction(this.searchQuery);
     });
@@ -40,15 +39,10 @@ export class MovieResultsComponent implements OnInit {
     this.route.queryParamMap
       .pipe(
         switchMap((queryParams: Params) => {
-          console.log('Through switch map');
-          console.log({ queryParams });
           return of(queryParams);
         })
       )
       .subscribe((queryParams: Params) => {
-        console.log('After switch map');
-        console.log({ queryParams });
-        console.log({ ...queryParams['params'] });
         this.currentPage = parseInt(queryParams['params']['page']);
         this.resultType = queryParams['params']['type'];
         this.searchFunction(this.searchQuery);
@@ -85,7 +79,6 @@ export class MovieResultsComponent implements OnInit {
       this.movieResults = [];
       console.error(e);
     }
-    console.log(this.movieResults);
   }
 
   //update the query parameter in page when pagination button is clicked
@@ -102,7 +95,6 @@ export class MovieResultsComponent implements OnInit {
   }
 
   async applyFilter(filters: any) {
-    console.log({ filters });
     await this.router.navigateByUrl(
       'search/' + this.searchQuery + '?page=1' + '&type=' + filters.movieType
     );
