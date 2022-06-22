@@ -22,13 +22,7 @@
       ></app-search-input>
     </div>
   </div>
-  <div class="loading" *ngIf="loading">
-    <div class="lds-facebook">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
+
   <div class="filters-section">
     <div class="toggle-btns">
       <button
@@ -46,6 +40,7 @@
         Sort by
       </button>
     </div>
+    
     <app-movie-filter
       [movieType]="this.resultType"
       *ngIf="isFiltersOpen"
@@ -54,8 +49,17 @@
     <app-sort (sortEmitter)="handleSortEvent($event)" *ngIf="isSortingOpen">
     </app-sort>
   </div>
+
+  <div class="loading" *ngIf="loading">
+    <div class="lds-facebook">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  
   <div
-    *ngIf="searchQuery.length != 0 && movieResults.length == 0"
+    *ngIf="!loading && searchQuery.length != 0 && movieResults.length == 0"
     class="no-results-container"
   >
     No results found!

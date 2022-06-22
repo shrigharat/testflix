@@ -9,7 +9,12 @@ export class ThemeService {
 
   //fetch previously stored value for dark mode from local storage
   constructor() { 
-    this.darkMode = Boolean(localStorage.getItem('darkMode'));
+    let savedDarkModeValue = localStorage.getItem('darkMode');
+    let darkMode = false;
+    if(savedDarkModeValue) {
+      darkMode = JSON.parse(savedDarkModeValue);
+    }
+    this.darkMode = darkMode;
     document.body.setAttribute('data-theme', this.darkMode ? 'dark' : 'light');
   }
 

@@ -21,11 +21,11 @@ export class MovieService {
     let newMovies: IMoviePreview[] = [];
     if (type === 'asc') {
       newMovies = movies.sort((a, b) => {
-        return parseInt(a.Year) - parseInt(b.Year);
+        return parseInt(a.year) - parseInt(b.year);
       });
     } else if (type === 'desc') {
       newMovies = movies.sort((a, b) => {
-        return parseInt(b.Year) - parseInt(a.Year);
+        return parseInt(b.year) - parseInt(a.year);
       });
     }
     return movies;
@@ -70,5 +70,45 @@ export class MovieService {
     const res = await fetch(this.baseUrl + '&i=' + id);
     const data = await res.json();
     return data;
+  }
+
+  transformMoviePreviewFields(data: any) {
+    return {
+      ...data,
+      title: data?.Title,
+      poster: data?.Poster,
+      year: data?.Year,
+      type: data?.Type,
+    };
+  }
+
+  transformMoviePreviewArray(movies: any) {
+    let newMovies = [];
+    for (let i = 0; i < movies.length; i++) {
+      newMovies.push(this.transformMoviePreviewFields(movies[i]));
+    }
+    return newMovies;
+  }
+
+  transformMovieFields(data: any) {
+    return {
+      title: data?.Title,
+      year: data?.Year,
+      rated: data?.Rated,
+      released: data?.Released,
+      runtime: data?.Runtime,
+      genre: data?.Genre,
+      director: data?.Director,
+      writer: data?.Writer,
+      actors: data?.Actors,
+      plot: data?.Plot,
+      language: data?.Language,
+      country: data?.Country,
+      poster: data?.Poster,
+      imdbRating: data?.imdbRating,
+      imdbVotes: data?.imdbVotes,
+      imdbID: data?.imdbID,
+      type: data?.Type,
+    };
   }
 }

@@ -1,39 +1,39 @@
 export default interface IMovie {
-  Title: string;
-  Year: string;
-  Rated: string;
-  Released: string;
-  Runtime: string;
-  Genre: string[];
-  Director: string;
-  Writer: string;
-  Actors: string;
-  Plot: string;
-  Language: string[];
-  Country: string;
-  Poster: string;
+  title: string;
+  year: string;
+  rated: string;
+  released: string;
+  runtime: string;
+  genre: string[];
+  director: string;
+  writer: string;
+  actors: string;
+  plot: string;
+  language: string[];
+  country: string;
+  poster: string;
   imdbRating: string;
   imdbVotes: string;
   imdbID: string;
-  Type: string;
+  type: string;
 }
 
 export const defaultMovie: IMovie = {
-  Title: '',
-  Year: '',
-  Rated: '',
-  Released: '',
-  Runtime: '',
-  Genre: [],
-  Director: '',
-  Writer: '',
-  Actors: '',
-  Plot: '',
-  Language: [],
-  Country: '',
-  Poster: '',
+  title: '',
+  year: '',
+  rated: '',
+  released: '',
+  runtime: '',
+  genre: [],
+  director: '',
+  writer: '',
+  actors: '',
+  plot: '',
+  language: [],
+  country: '',
+  poster: '',
   imdbRating: '',
   imdbVotes: '',
   imdbID: '',
-  Type: '',
+  type: '',
 };

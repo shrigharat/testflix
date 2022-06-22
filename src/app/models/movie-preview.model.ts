@@ -1,15 +1,15 @@
 export default interface IMoviePreview {
-  Year: string;
-  Title: string;
-  Poster: string;
-  Type: string;
+  year: string;
+  title: string;
+  poster: string;
+  type: string;
   imdbID: string;
 }
 
 export const defaultMoviePreview: IMoviePreview = {
-  Year: '',
-  Title: '',
-  Poster: '',
-  Type: '',
+  year: '',
+  title: '',
+  poster: '',
+  type: '',
   imdbID: '',
 };

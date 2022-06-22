@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
-import IMoviePreview from '../models/movie-preview.model';
-import { MovieService } from '../services/movie.service';
-import { ThemeService } from '../services/theme.service';
+import IMoviePreview from '../../models/movie-preview.model';
+import { MovieService } from '../../services/movie.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-movie-results',
@@ -59,6 +59,8 @@ export class MovieResultsComponent implements OnInit {
   //search movies
   async searchFunction(searchString: string) {
     this.loading = true;
+    //remove whitespace from search
+    searchString = searchString.trim();
     try {
       if (searchString) {
         let result = await this.movieService.fetchMovies(
@@ -69,7 +71,9 @@ export class MovieResultsComponent implements OnInit {
         if (!result['Search']) {
           this.movieResults = [];
         } else {
-          this.movieResults = result['Search'];
+          this.movieResults = this.movieService.transformMoviePreviewArray(
+            result['Search']
+          );
         }
         this.totalResults = parseInt(result['totalResults']);
       }

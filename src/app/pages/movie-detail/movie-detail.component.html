@@ -20,20 +20,20 @@
 </div>
 <div class="movie-details">
   <div class="img-container">
-    <img [src]="movie.Poster" alt="" />
+    <img [src]="movie.poster" alt="" />
   </div>
   <div class="details-content">
-    <p class="movie-title">{{ movie.Title }}</p>
-    <p class="detail-line"><strong>Year</strong> - {{ movie.Year }}</p>
-    <p class="detail-line"><strong>Rated</strong> - {{ movie.Rated }}</p>
-    <p class="detail-line"><strong>Released</strong> - {{ movie.Released }}</p>
-    <p class="detail-line"><strong>Director</strong> - {{ movie.Director }}</p>
-    <p class="detail-line"><strong>Actors</strong> - {{ movie.Actors }}</p>
+    <p class="movie-title">{{ movie.title }}</p>
+    <p class="detail-line"><strong>Year</strong> - {{ movie.year }}</p>
+    <p class="detail-line"><strong>Rated</strong> - {{ movie.rated }}</p>
+    <p class="detail-line"><strong>Released</strong> - {{ movie.released }}</p>
+    <p class="detail-line"><strong>Director</strong> - {{ movie.director }}</p>
+    <p class="detail-line"><strong>Actors</strong> - {{ movie.actors }}</p>
     <p class="detail-line">
       <strong>Genre</strong> -
       <app-chip
         style="margin-right: 0.4rem"
-        *ngFor="let genre of movie.Genre"
+        *ngFor="let genre of movie.genre"
         text="{{ genre }}"
       ></app-chip>
     </p>
@@ -41,11 +41,11 @@
       <strong>Language</strong> -
       <app-chip
         style="margin-right: 0.4rem"
-        *ngFor="let lang of movie.Language"
+        *ngFor="let lang of movie.language"
         text="{{ lang }}"
       ></app-chip>
     </p>
-    <p class="detail-line"><strong>Plot</strong> - {{ movie.Plot }}</p>
+    <p class="detail-line"><strong>Plot</strong> - {{ movie.plot }}</p>
     <p class="detail-line">
       <strong>IMDB Rating</strong> - {{ movie.imdbRating }}
       <progress id="rating" value="{{movie.imdbRating}}" max="10.0">32%</progress>

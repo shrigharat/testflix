@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -8,22 +9,24 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { MovieService } from '../services/movie.service';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-search-input',
   templateUrl: './search-input.component.html',
   styleUrls: ['./search-input.component.css'],
 })
-export class SearchInputComponent implements OnInit {
+export class SearchInputComponent implements OnInit, AfterViewInit {
   @Output() emitter = new EventEmitter();
   @ViewChild('focusContainer') focusContainer: ElementRef;
+  @ViewChild('searchInput') searchInput: ElementRef;
   // focusContainer : any;
 
   @Input() query = '';
 
   showSearchHistory = false;
   constructor(public movieService: MovieService, public renderer: Renderer2) {
+
     this.renderer.listen(window, 'click', (e: Event) => {
       if (
         e.target !== this.focusContainer.nativeElement &&
@@ -35,7 +38,13 @@ export class SearchInputComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
+    //focus search input field
+    this.searchInput.nativeElement.focus();
+  }
 
   updateQuery(e: KeyboardEvent) {
     this.query = (e.target as HTMLInputElement).value;

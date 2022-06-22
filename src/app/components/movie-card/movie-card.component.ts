@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import IMoviePreview, {
   defaultMoviePreview,
-} from '../models/movie-preview.model';
+} from '../../models/movie-preview.model';
 
 @Component({
   selector: 'app-movie-card',
@@ -11,12 +11,15 @@ import IMoviePreview, {
 export class MovieCardComponent implements OnInit {
   @Input() movie: IMoviePreview = defaultMoviePreview;
 
+  NOT_FOUND_IMG_URL =
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png';
+
   constructor() {}
 
   ngOnInit(): void {
-    this.movie.Poster =
-      !this.movie.Poster || this.movie.Poster === 'N/A'
-        ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png'
-        : this.movie.Poster;
+    this.movie.poster =
+      !this.movie.poster || this.movie.poster === 'N/A'
+        ? this.NOT_FOUND_IMG_URL
+        : this.movie.poster;
   }
 }

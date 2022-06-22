@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { SearchInputComponent } from './search-input/search-input.component';
-import { MovieResultsComponent } from './movie-results/movie-results.component';
-import { MovieDetailComponent } from './movie-detail/movie-detail.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { HomeComponent } from './pages/home/home.component';
+import { MovieResultsComponent } from './pages/movie-results/movie-results.component';
+import { MovieDetailComponent } from './pages/movie-detail/movie-detail.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

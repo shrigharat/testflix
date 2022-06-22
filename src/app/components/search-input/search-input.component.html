@@ -12,6 +12,8 @@
     placeholder="Enter movie name"
     (keyup)="updateQuery($event)"
     (focus)="showSearchHistory = true"
+    #searchInput
+    spellcheck="false"
   />
   <button
     class="search-submit-btn"

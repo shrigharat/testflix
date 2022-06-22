@@ -1,0 +1,18 @@
+<article class="movie-card">
+  <div class="movie-img">
+    <img [src]="movie.poster" alt="" />
+  </div>
+  <div class="movie-detail">
+    <!-- <div class="movie-type"> -->
+    <app-chip
+      class="movie-type"
+      bgColor="rgba(0,0,0,0.7)"
+      text="{{ movie.type }}"
+    ></app-chip>
+    <!-- </div> -->
+    <a title="{{ movie.title }}" routerLink="/movie/{{ movie.imdbID }}">{{
+      movie.title
+    }}</a>
+    <app-chip text="{{ movie.year }}"></app-chip>
+  </div>
+</article>
