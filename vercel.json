@@ -14,7 +14,8 @@
         {
           "key": "Cross-Origin-Resource-Policy",
           "value": "Cross-Origin"
-        }
+        },
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
       ]
     }
   ]
