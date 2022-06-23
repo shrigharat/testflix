@@ -14,7 +14,7 @@
   height: 60vh;
 }
 
-.not-found-container a {
+.not-found-container button {
   text-decoration: none;
   padding: 1rem 1.5rem;
   border: 1px solid var(--text-color);
@@ -23,7 +23,7 @@
   transition: all 0.4s ease;
 }
 
-.not-found-container a:hover {
+.not-found-container button:hover {
   color: var(--background-color);
   background-color: var(--text-color);
 }

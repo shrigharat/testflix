@@ -4,11 +4,14 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
   Renderer2,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../../services/movie.service';
 
 @Component({
@@ -24,9 +27,14 @@ export class SearchInputComponent implements OnInit, AfterViewInit {
 
   @Input() query = '';
 
-  showSearchHistory = false;
-  constructor(public movieService: MovieService, public renderer: Renderer2) {
+  searchHistory = [];
 
+  showSearchHistory = false;
+  constructor(
+    public movieService: MovieService,
+    public renderer: Renderer2,
+    public route: ActivatedRoute
+  ) {
     this.renderer.listen(window, 'click', (e: Event) => {
       if (
         e.target !== this.focusContainer.nativeElement &&
@@ -36,6 +44,7 @@ export class SearchInputComponent implements OnInit, AfterViewInit {
         // console.log('Clicked outside focus container');
       }
     });
+    
   }
 
   ngOnInit(): void {
@@ -43,7 +52,11 @@ export class SearchInputComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     //focus search input field
-    this.searchInput.nativeElement.focus();
+    console.log('Router');
+    console.log({route: this.route});
+    if(!this.route.snapshot.url || this.route.snapshot.url==[]) {
+      this.searchInput.nativeElement.focus();
+    }
   }
 
   updateQuery(e: KeyboardEvent) {
@@ -52,6 +65,7 @@ export class SearchInputComponent implements OnInit, AfterViewInit {
 
   searchItemClick(item: string) {
     this.query = item;
+    this.searchFunction();
   }
 
   blurEventHandle(e: Event) {
@@ -59,8 +73,7 @@ export class SearchInputComponent implements OnInit, AfterViewInit {
     console.log(e);
   }
 
-  searchFunction($event: Event) {
-    $event.preventDefault();
+  searchFunction() {
     this.showSearchHistory = false;
     if (this.query) {
       this.emitter.emit(this.query);

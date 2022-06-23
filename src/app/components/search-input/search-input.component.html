@@ -1,7 +1,7 @@
 <form
   class="search-container"
   name="searchForm"
-  (ngSubmit)="searchFunction($event)"
+  (ngSubmit)="searchFunction()"
   (focus)="showSearchHistory = true"
   tabindex="1"
   #focusContainer
@@ -18,7 +18,7 @@
   <button
     class="search-submit-btn"
     type="submit"
-    (click)="searchFunction($event)"
+    (click)="searchFunction()"
   >
     <img
       class="search-icon"
